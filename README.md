@@ -72,7 +72,9 @@ Cette application simule un outil de pilotage à destination des équipes charg�
 ✔️ **Piloter les relances avec souplesse grâce au seuil ajustable**
 
 ---
+PS : L’application peut parfois passer en veille (hébergement gratuit Streamlit). Si c’est le cas, cliquez sur “Yes, get this app back up!” — elle démarre en quelques secondes.
 
+---
 ## 📂 Arborescence
 
 ├── app_prevention_cpam.py ← Code Streamlit
