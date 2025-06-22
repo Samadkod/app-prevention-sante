@@ -46,11 +46,13 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs(["🏠 Accueil", "🔎 Exploration", "�
 with tab1:
     st.header("Contexte & Objectif")
     st.markdown("""
-    Cette application s'inscrit dans la mission **Aller Vers** de la CPAM.
+    Cette application s'inscrit dans la mission **Aller Vers** de la CPAM. 
     Elle permet de :
     - Suivre la participation aux campagnes de prévention santé
     - Identifier les assurés les plus à risque de non-participation
     - Aider à prioriser les relances de manière intelligente
+    
+     - Objectif : prédire la non-participation future pour prioriser les appels
 
     **NB : Données simulées. Projet de démonstration.**
     """)
