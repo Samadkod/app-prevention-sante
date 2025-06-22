@@ -76,7 +76,9 @@ Cette application simule un outil de pilotage à destination des équipes charg�
 ## 📂 Arborescence
 
 ├── app_prevention_cpam.py ← Code Streamlit
+
 ├── donnees_prevention_cpam.csv ← Jeu de données simulé
+
 ├── README.md ← Documentation
 
 
