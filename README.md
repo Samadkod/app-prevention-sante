@@ -1,10 +1,10 @@
 # 📊 [Application Prévention Santé & Relances – CPAM](https://app-prevention-sante-cpam-f9gmpfa2h7swk2wrppdsoi.streamlit.app/)
 
-🎯 **Objectif** : Anticiper la non-participation des assurés aux campagnes de prévention santé afin d'optimiser les relances personnalisées dans le cadre de la mission "Aller Vers".
+**Objectif** : Anticiper la non-participation des assurés aux campagnes de prévention santé afin d'optimiser les relances personnalisées dans le cadre de la mission "Aller Vers".
 
 ---
 
-## 🔍 Contexte
+##  Contexte
 
 Dans le cadre de la COG 2023-2027 de l’Assurance Maladie, la stratégie **“Aller Vers”** vise à améliorer la participation des assurés aux dépistages via des **relances téléphoniques ciblées**.  
 Cette application simule un outil de pilotage à destination des équipes chargées des relances sur le terrain.
