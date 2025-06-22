@@ -52,9 +52,9 @@ with tab1:
     - Identifier les assurés les plus à risque de non-participation
     - Aider à prioriser les relances de manière intelligente
 
-    🎯 Objectif du modèle : prédire la non-participation future pour prioriser les appels
+     **Objectif du modèle : prédire la non-participation future pour prioriser les appels**
 
-    **NB : Données simulées. Projet de démonstration.**
+    **NB : Données simulées**
     """)
 
 # 🔎 Exploration
@@ -104,12 +104,12 @@ with tab3:
     st.plotly_chart(px.box(df, x="Sexe", y="Score_isolement", color="Sexe", title="Distribution du score d'isolement"),
                     use_container_width=True)
 
-# 🧠Scoring
+# 🧠 Scoring
 with tab4:
     st.header("Modèle de prédiction du risque")
     st.markdown("""
 ---
-### 🧠 Comment interpréter le **score d'isolement** ?
+### Comment interpréter le **score d'isolement** ?
 Ce score varie entre **0 et 1** et mesure le **niveau de solitude sociale** estimée d’un assuré.
 
 - **0.1 → Très peu isolé** : proche de services, en interaction régulière, bien entouré  
