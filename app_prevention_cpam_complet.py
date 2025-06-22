@@ -95,6 +95,11 @@ with tab3:
     col2.metric("📉 Score isolement moyen", f"{df['Score_isolement'].mean():.2f}")
     st.plotly_chart(px.box(df, x="Sexe", y="Score_isolement", color="Sexe", title="Score d'isolement par sexe"),
                     use_container_width=True)
+    
+    col1.metric("📉 Participation avant relance", f"{df['Participation_2023'].mean():.2%}")
+col2.metric("📈 Participation après relance", f"{df['Participation_post_relance'].mean():.2%}", 
+            delta=f"{(df['Participation_post_relance'].mean() - df['Participation_2023'].mean()) * 100:.1f} %")
+
 
 # 🧠 Scoring
 with tab4:
