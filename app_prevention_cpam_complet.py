@@ -59,12 +59,33 @@ with tab1:
 
 # 🔎 Exploration
 with tab2:
-    st.header("Exploration des données")
-    st.plotly_chart(px.histogram(df, x="Âge", nbins=20, title="Répartition des âges"), use_container_width=True)
-    fig = px.histogram(df, x="Participation_post_relance", color="Sexe", barmode="group",
-                       title="Participation après relance")
-    fig.update_xaxes(tickvals=[0, 1], ticktext=["Non", "Oui"])
-    st.plotly_chart(fig, use_container_width=True)
+    st.header("🔎 Exploration des données")
+
+    st.subheader("📊 Répartition des âges des assurés")
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.markdown("**Histogramme**")
+        fig_age = px.histogram(df, x="Âge", nbins=20, color_discrete_sequence=["#636EFA"])
+        fig_age.update_layout(title="Distribution des âges", xaxis_title="Âge", yaxis_title="Nombre d’assurés")
+        st.plotly_chart(fig_age, use_container_width=True)
+
+    with col2:
+        st.markdown("**Boxplot**")
+        fig_box = px.box(df, y="Âge", points="outliers", color_discrete_sequence=["#00CC96"])
+        fig_box.update_layout(title="Valeurs extrêmes et répartition")
+        st.plotly_chart(fig_box, use_container_width=True)
+
+    st.subheader("📈 Taux de participation après relance (par sexe)")
+    df["Participation_label"] = df["Participation_post_relance"].map({0: "Non", 1: "Oui"})
+
+    fig_part = px.histogram(df, x="Participation_label", color="Sexe",
+                            barmode="group", text_auto=True,
+                            color_discrete_sequence=["#EF553B", "#636EFA"])
+    fig_part.update_layout(title="Participation après relance par sexe",
+                           xaxis_title="Participation", yaxis_title="Nombre d’assurés")
+    st.plotly_chart(fig_part, use_container_width=True)
+
 
 # 📈 KPI
 with tab3:
