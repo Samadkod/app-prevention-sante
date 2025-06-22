@@ -110,19 +110,37 @@ with tab3:
                title="Distribution du score d'isolement"),
         use_container_width=True
     )
+### Comment interpréter le **score d'isolement** ?
+Ce score varie entre **0 et 1** et mesure le **niveau de solitude sociale** estimée d’un assuré.
 
+- **0.1 → Très peu isolé** : proche de services, en interaction régulière, bien entouré
+- **0.5 → Moyennement isolé** : peu de contacts médicaux, isolement modéré
+- **0.9 → Très isolé** : zone rurale, aucun suivi médical connu, aucune interaction récente
 
+> **Exemple** : Un senior de 82 ans en zone ZRR, non relancé en 2023, aura un score élevé.
+
+ ---
 
 # 🧠 Scoring
 with tab4:
     st.header("Modèle de prédiction du risque")
     st.markdown("""
-    🔍 Le score de risque estime la probabilité qu’un assuré **ne participe pas** après relance.
+    Le score de risque estime la probabilité qu’un assuré **ne participe pas** après relance.
+    Autrement dit, le modèle prédit la probabilité de **non-participation après relance**.
     Il est basé sur :
     - Le sexe, l’âge
     - L’isolement social
     - Le revenu, la relance, la zone géographique
     """)
+
+- **Score = 0.85** → très peu de chance de répondre → **à relancer absolument**
+- **Score = 0.30** → assuré probablement actif ou participatif
+
+Le **seuil** (par défaut à `0.6`) te permet de filtrer :
+- tous les assurés **au-dessus de ce seuil** sont considérés **prioritaires**
+- tu peux le régler selon ta stratégie (ampleur de la campagne, moyens disponibles)
+
+""")
     st.plotly_chart(px.histogram(df, x="Score_risque", nbins=20, title="Distribution des scores de risque"),
                     use_container_width=True)
 
@@ -132,6 +150,7 @@ with tab4:
     st.dataframe(prioritaires[["ID_Assuré", "Âge", "Sexe", "Score_risque"]])
     st.download_button("📥 Télécharger la liste", data=prioritaires.to_csv(index=False),
                        file_name="assures_a_relancer.csv", mime="text/csv")
+
 
 # 🧭 Recommandations
 with tab5:
