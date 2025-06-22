@@ -46,13 +46,13 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs(["🏠 Accueil", "🔎 Exploration", "�
 with tab1:
     st.header("Contexte & Objectif")
     st.markdown("""
-    Cette application s'inscrit dans la mission **Aller Vers** de la CPAM. 
+    Cette application s'inscrit dans la mission **Aller Vers** de la CPAM.  
     Elle permet de :
     - Suivre la participation aux campagnes de prévention santé
     - Identifier les assurés les plus à risque de non-participation
     - Aider à prioriser les relances de manière intelligente
-    
-     - Objectif : prédire la non-participation future pour prioriser les appels
+
+    🎯 Objectif du modèle : prédire la non-participation future pour prioriser les appels
 
     **NB : Données simulées. Projet de démonstration.**
     """)
@@ -86,61 +86,49 @@ with tab2:
                            xaxis_title="Participation", yaxis_title="Nombre d’assurés")
     st.plotly_chart(fig_part, use_container_width=True)
 
-
 # 📈 KPI
 with tab3:
     st.header("📈 Indicateurs clés enrichis")
     
-    # Calculs pour KPI
     taux_avant = df["Participation_2023"].mean()
     taux_apres = df["Participation_post_relance"].mean()
     delta_taux = taux_apres - taux_avant
     isolement_moyen = df["Score_isolement"].mean()
     
-    # KPI avec flèches
     col1, col2, col3 = st.columns(3)
     col1.metric("📉 Participation avant relance", f"{taux_avant:.2%}")
-    col2.metric("📈 Participation après relance", f"{taux_apres:.2%}", 
-                delta=f"{delta_taux*100:.1f} %")
+    col2.metric("📈 Participation après relance", f"{taux_apres:.2%}", delta=f"{delta_taux*100:.1f} %")
     col3.metric("📊 Score isolement moyen", f"{isolement_moyen:.2f}")
-    
+
     st.subheader("🎯 Score d’isolement par sexe")
-    st.plotly_chart(
-        px.box(df, x="Sexe", y="Score_isolement", color="Sexe", 
-               title="Distribution du score d'isolement"),
-        use_container_width=True
-    )
-### Comment interpréter le **score d'isolement** ?
-Ce score varie entre **0 et 1** et mesure le **niveau de solitude sociale** estimée d’un assuré.
+    st.plotly_chart(px.box(df, x="Sexe", y="Score_isolement", color="Sexe", title="Distribution du score d'isolement"),
+                    use_container_width=True)
 
-- **0.1 → Très peu isolé** : proche de services, en interaction régulière, bien entouré
-- **0.5 → Moyennement isolé** : peu de contacts médicaux, isolement modéré
-- **0.9 → Très isolé** : zone rurale, aucun suivi médical connu, aucune interaction récente
-
-> **Exemple** : Un senior de 82 ans en zone ZRR, non relancé en 2023, aura un score élevé.
-
- ---
-
-# 🧠 Scoring
+# 🧠Scoring
 with tab4:
     st.header("Modèle de prédiction du risque")
     st.markdown("""
-    Le score de risque estime la probabilité qu’un assuré **ne participe pas** après relance.
-    Autrement dit, le modèle prédit la probabilité de **non-participation après relance**.
-    Il est basé sur :
-    - Le sexe, l’âge
-    - L’isolement social
-    - Le revenu, la relance, la zone géographique
-    """)
+---
+### 🧠 Comment interpréter le **score d'isolement** ?
+Ce score varie entre **0 et 1** et mesure le **niveau de solitude sociale** estimée d’un assuré.
 
-- **Score = 0.85** → très peu de chance de répondre → **à relancer absolument**
+- **0.1 → Très peu isolé** : proche de services, en interaction régulière, bien entouré  
+- **0.5 → Moyennement isolé** : peu de contacts médicaux, isolement modéré  
+- **0.9 → Très isolé** : zone rurale, aucun suivi médical connu, aucune interaction récente  
+
+> **Exemple** : Un senior de 82 ans en zone ZRR, non relancé en 2023, aura un score élevé.
+
+---
+
+### 🎯 Et le **score de risque / seuil de priorisation** ?
+Le modèle prédit la probabilité de **non-participation après relance**.
+
+- **Score = 0.85** → très peu de chance de répondre → **à relancer absolument**  
 - **Score = 0.30** → assuré probablement actif ou participatif
 
-Le **seuil** (par défaut à `0.6`) te permet de filtrer :
-- tous les assurés **au-dessus de ce seuil** sont considérés **prioritaires**
-- tu peux le régler selon ta stratégie (ampleur de la campagne, moyens disponibles)
-
+Le **seuil** (par défaut à `0.6`) permet de filtrer les profils prioritaires selon les moyens disponibles.
 """)
+
     st.plotly_chart(px.histogram(df, x="Score_risque", nbins=20, title="Distribution des scores de risque"),
                     use_container_width=True)
 
@@ -150,7 +138,6 @@ Le **seuil** (par défaut à `0.6`) te permet de filtrer :
     st.dataframe(prioritaires[["ID_Assuré", "Âge", "Sexe", "Score_risque"]])
     st.download_button("📥 Télécharger la liste", data=prioritaires.to_csv(index=False),
                        file_name="assures_a_relancer.csv", mime="text/csv")
-
 
 # 🧭 Recommandations
 with tab5:
