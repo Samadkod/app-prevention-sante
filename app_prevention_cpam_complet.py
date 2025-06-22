@@ -89,16 +89,28 @@ with tab2:
 
 # 📈 KPI
 with tab3:
-    st.header("Indicateurs clés")
-    col1, col2 = st.columns(2)
-    col1.metric("🎯 Taux de participation post-relance", f"{df['Participation_post_relance'].mean():.2%}")
-    col2.metric("📉 Score isolement moyen", f"{df['Score_isolement'].mean():.2f}")
-    st.plotly_chart(px.box(df, x="Sexe", y="Score_isolement", color="Sexe", title="Score d'isolement par sexe"),
-                    use_container_width=True)
+    st.header("📈 Indicateurs clés enrichis")
     
-    col1.metric("📉 Participation avant relance", f"{df['Participation_2023'].mean():.2%}")
-col2.metric("📈 Participation après relance", f"{df['Participation_post_relance'].mean():.2%}", 
-            delta=f"{(df['Participation_post_relance'].mean() - df['Participation_2023'].mean()) * 100:.1f} %")
+    # Calculs pour KPI
+    taux_avant = df["Participation_2023"].mean()
+    taux_apres = df["Participation_post_relance"].mean()
+    delta_taux = taux_apres - taux_avant
+    isolement_moyen = df["Score_isolement"].mean()
+    
+    # KPI avec flèches
+    col1, col2, col3 = st.columns(3)
+    col1.metric("📉 Participation avant relance", f"{taux_avant:.2%}")
+    col2.metric("📈 Participation après relance", f"{taux_apres:.2%}", 
+                delta=f"{delta_taux*100:.1f} %")
+    col3.metric("📊 Score isolement moyen", f"{isolement_moyen:.2f}")
+    
+    st.subheader("🎯 Score d’isolement par sexe")
+    st.plotly_chart(
+        px.box(df, x="Sexe", y="Score_isolement", color="Sexe", 
+               title="Distribution du score d'isolement"),
+        use_container_width=True
+    )
+
 
 
 # 🧠 Scoring
