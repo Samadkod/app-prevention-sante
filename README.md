@@ -1,4 +1,4 @@
-# 📊 [Application Prévention Santé & Relances – CPAM](https://app-prevention-sante-cpam-f9gmpfa2h7swk2wrppdsoi.streamlit.app/)
+# 📊 [Application Prévention Santé & Relances](https://app-prevention-sante-cpam-f9gmpfa2h7swk2wrppdsoi.streamlit.app/)
 
 **Objectif** : Anticiper la non-participation des assurés aux campagnes de prévention santé afin d'optimiser les relances personnalisées dans le cadre de la mission "Aller Vers".
 
