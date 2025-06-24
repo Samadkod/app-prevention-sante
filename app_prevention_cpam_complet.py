@@ -6,8 +6,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 
 # Configuration
-st.set_page_config(page_title="Prévention Santé - CPAM", layout="wide")
-st.title("📊 Application Prévention Santé & Relances - CPAM")
+st.set_page_config(page_title="Prévention Santé", layout="wide")
+st.title("📊 Application Prévention Santé & Relances")
 
 # Chargement des données
 @st.cache_data
@@ -46,7 +46,7 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs(["🏠 Accueil", "🔎 Exploration", "�
 with tab1:
     st.header("Contexte & Objectif")
     st.markdown("""
-    Cette application s'inscrit dans la mission **Aller Vers** de la CPAM.  
+    Cette application s'inscrit dans la mission **Aller Vers la prévention**.  
     Elle permet de :
     - Suivre la participation aux campagnes de prévention santé
     - Identifier les assurés les plus à risque de non-participation
